@@ -27,12 +27,15 @@ d3.prosCons = function module() {
   var margin = {top: 20, right: 10, bottom: 20, left: 10};
   var svg;
   var zippedData;
+  var label;
   function exports(_selection) {
 
     _selection.each(function(_data) {
       var self = this;
       var windowWidth = Math.max(280, Math.min($('body').width(), 480))
       var div;
+
+
       d3.select(self)
         .style('width', windowWidth+'px')
 
@@ -42,26 +45,59 @@ d3.prosCons = function module() {
       }
 
       zippedData = d3.zip(_data[0], _data[1])
-      var table = div.append('table').attr('class', 'table')
       var z = ['#1a468c', '#f9a33d', '#d13d30']
+      var prosColor = d3.scale.log()
+        .domain(d3.extent(_data[0].map(function(d){return d.keyness})))
+        .range(['#6c88b5', '#1a468c'])
+      var consColor = d3.scale.log()
+        .domain(d3.extent(_data[1].map(function(d){return d.keyness})))
+        .range(['#fbc483', '#f9a33d'])
 
-      table.selectAll('.row')
+      var table = div.append('table').attr('class', 'table')
+
+      table.selectAll('.target')
+      .data([label])
+      .enter().append('caption')
+      .html(function(d) {return d;})
+
+      var tr = table.selectAll('.row')
         .data(zippedData)
       .enter().append('tr')
       .attr('class', 'row')
-      .selectAll('.col')
+
+
+      var td = tr.selectAll('.col')
         .data(function(d){return d})
-      .enter().append('td')
+
+      td.enter().append('td')
       .classed({'col': true})
-      .html(function(d) {return d.keyword})
       .classed('pros', function(d,i) {
-          if (i==0) return true;
-          else false;
+        if (i==0) return true;
+        else false;
       })
       .classed('cons', function(d,i) {
         if (i==1) return true;
         else false;
       })
+
+      tr.selectAll('.pros')
+        .style('background-color', function(d) { return prosColor(d.keyness)})
+
+      tr.selectAll('.cons')
+        .style('background-color', function(d) { return consColor(d.keyness)})
+
+      td.append('span')
+        .attr('class', 'keyword')
+        .html(function(d) {return d.keyword})
+
+      td.append('span')
+        .attr('class', 'keyness')
+        .html(function(d) {return '('+Math.round(d.keyness)+')'})
+
+      td.append('span')
+        .attr('class', 'arrow')
+        .html(function(d) {return '▾'})
+
 
 
 
@@ -335,11 +371,11 @@ d3.prosCons = function module() {
       */
     }) // end of each
   } // end of exports
-  exports.label = function(label) {
+  exports.label = function(_label) {
     if(!arguments.length) {
       return label;
     } else {
-      label = label;
+      label = _label;
     }
   }
   exports.targetData = function(data, optionIndex) {

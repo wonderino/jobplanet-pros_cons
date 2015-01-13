@@ -18,7 +18,8 @@
   <script>
 
   var prosPath = 'job_planet_agg_pros.json', consPath = 'job_planet_agg_cons.json'
-  var chart = d3.prosCons();
+  var chart = d3.prosCons()
+  chart.label('전체');
   var dataManager = d3.prosConsDataManager();
   dataManager.loadJSONData(prosPath, consPath, function(data){
 

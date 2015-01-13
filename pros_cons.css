@@ -10,21 +10,36 @@ div.chart, div.canvas, table.table{
 }
 
 td.col {
-  font-size : 13px;
-  padding: 6px 2px;
-  text-align: center;
-  color: #fff;
+  font-size : 14px;
+  padding: 8px 10px;
+  margin : 0 8px;
   width : 50%;
+  color: #fff;
+  font-weight : 100;
 }
 
 td.col.pros {
-  background-color : #1a468c;
+
   border-bottom : 2px solid #1a5e8c;
 }
 
 td.col.cons {
-  background-color : #f9a33d;
+
   border-bottom : 2px solid #f98c3d;
+}
+
+
+span.keyword, span.keyness {
+  margin : 4px;
+}
+
+span.arrow {
+  float:right;
+}
+
+span.keyness {
+  font-size : 10px;
+  padding-left: 5px;
 }
 
 div.menu {
