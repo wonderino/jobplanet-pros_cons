@@ -1,12 +1,24 @@
 body {
   margin: .5em auto .5em auto;
-  font-family : "Apple SD Gothic Neo","Malgun Gothic",Dotum,sans-serif
+  font-family : "Apple SD Gothic Neo","Malgun Gothic",Dotum,sans-serif;
 }
 
 div.chart, div.canvas, table.table{
   margin: 0 auto;
   width : 100%;
   border-spacing : 0px;
+  font-weight : 100;
+}
+
+caption.target {
+  padding : 8px;
+}
+
+th.head {
+  font-weight : 100;
+  font-size : 15px;
+  padding: 8px 10px;
+  margin : 0 8px;
 }
 
 td.col {
@@ -15,19 +27,36 @@ td.col {
   margin : 0 8px;
   width : 50%;
   color: #fff;
-  font-weight : 100;
+  curcursor : pointer;
 }
 
 td.col.pros {
 
-  border-bottom : 2px solid #1a5e8c;
+  /*border-bottom : 1px solid #1a5e8c;*/
 }
 
 td.col.cons {
 
-  border-bottom : 2px solid #f98c3d;
+  /*border-bottom : 2px solid #f98c3d;*/
 }
 
+td.col.selected {
+  color : #111;
+  font-weight : 400;
+}
+
+
+
+ul.sentences {
+    padding :4px;
+    list-style-type: none;
+    font-size : 13px;
+}
+
+li.sentence {
+  padding : 4px;
+  margin : 4px;
+}
 
 span.keyword, span.keyness {
   margin : 4px;

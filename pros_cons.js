@@ -3,10 +3,11 @@ d3.prosConsDataManager = function module() {
 
   exports.loadJSONData = function(_prosPath, _consPath, _callback) {
     function type(data) {
-      data.forEach(function(d) {
+      data.forEach(function(d,i) {
         if (d.pos.indexOf('V') == 0) {
           d.keyword += '다';
         }
+        d.index = i;
       })
     }
     d3.json(_prosPath, function(_err, _prosData) {
@@ -56,9 +57,17 @@ d3.prosCons = function module() {
       var table = div.append('table').attr('class', 'table')
 
       table.selectAll('.target')
-      .data([label])
+        .data([label])
       .enter().append('caption')
+      .attr('class', 'target')
       .html(function(d) {return d;})
+
+      table.append('tr').selectAll('.head')
+        .data(['장점', '단점'])
+      .enter().append('th')
+      .attr('class', 'head')
+      .html(function(d) {return d})
+      .style('color', function(d,i) {return z[i]})
 
       var tr = table.selectAll('.row')
         .data(zippedData)
@@ -97,6 +106,42 @@ d3.prosCons = function module() {
       td.append('span')
         .attr('class', 'arrow')
         .html(function(d) {return '▾'})
+
+      td.on('click', function(d,i) {
+        if (d3.select(this).classed('selected')) {
+          table.selectAll('tr.appended').remove();
+          d3.select(this).classed({'selected': false})
+        }
+        else if (table.selectAll('tr.appended').empty()) {
+          insertTr(this)
+        } else {
+          table.selectAll('tr.appended').remove();
+          d3.selectAll('td.selected').classed({'selected': false})
+          insertTr(this);
+        }
+
+        function insertTr(self) {
+          d3.select(self).classed({'selected': true})
+
+          var parentTr = d3.select(self).node().parentNode;
+          var parentTrIndex = d3.select(parentTr).datum()[i].index;
+          var newTr = table
+            .insert('tr', "tr.row:nth-child("+(parentTrIndex+4) + ")")
+            .attr('class', 'appended')
+
+          newTr.append('td')
+          .attr('colspan', 2)
+          .append('ul')
+          .attr('class', 'sentences')
+          .selectAll('.sentence')
+          .data(d.sentences)
+          .enter().append('li')
+          .attr('class', 'sentence')
+          .html(function(d) {return '"' + d +'"';})
+
+        }
+
+      })
 
 
 
