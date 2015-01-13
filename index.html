@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pros vs. Cons</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <link rel="stylesheet" type="text/css" href="pros_cons.css">
+</head>
+<body>
+
+  <div class="chart pros_cons">
+
+  </div>
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="pros_cons.js"></script>
+  <script>
+
+  var prosPath = 'job_planet_agg_pros.json', consPath = 'job_planet_agg_cons.json'
+  var chart = d3.prosCons();
+  var dataManager = d3.prosConsDataManager();
+  dataManager.loadJSONData(prosPath, consPath, function(data){
+
+    d3.select('div.chart.pros_cons')
+      .datum(data)
+      .call(chart)
+  });
+  </script>
+
+  </html>
