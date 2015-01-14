@@ -27,6 +27,7 @@ d3.prosCons = function module() {
   var svg;
   var zippedData;
   var label;
+  var dataListMap;
 
   function scrollToTr(self) {
     var dist = d3.select(self).node()
@@ -147,7 +148,7 @@ d3.prosCons = function module() {
             .on('click', function(d) {
               table.selectAll('tr.appended').remove();
               d3.select(self).classed({'selected': false})
-              scrollToTr(self);
+              //scrollToTr(self);
             })
 
           newTr.append('td')
@@ -170,6 +171,10 @@ d3.prosCons = function module() {
     } else {
       label = _label;
     }
+  }
+
+  exports.dataListMap = function(_dataListMap) {
+
   }
 
   return exports;
