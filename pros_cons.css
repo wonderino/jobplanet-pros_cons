@@ -29,7 +29,7 @@ td.col {
   width : 50%;
   color: #fff;
   curcursor : pointer;
-  -webkit-transition : color .4s;
+  -webkit-transition : color .4s, background-color .4s;
   transition: color .4s;
 }
 
@@ -44,9 +44,17 @@ td.col.cons {
 }
 
 td.col.selected {
-  color : #111;
   font-weight : 400;
 }
+
+td.col.pros.selected {
+  color : #f9a33d;
+}
+
+td.col.cons.selected {
+  color : #1a468c;
+}
+
 
 ul.sentences {
   overflow-y:scroll;
