@@ -45,15 +45,13 @@ td.col.selected {
   font-weight : 400;
 }
 
-tr.appended ul {
-  height: 400px;
-  overflow-y:scroll;
-}
-
 ul.sentences {
-    padding :4px;
-    list-style-type: none;
-    font-size : 13px;
+  -webkit-transition : height 2s;
+  transition: width 2s;
+  overflow-y:scroll;
+  padding :4px;
+  list-style-type: none;
+  font-size : 13px;
 }
 
 li.sentence {

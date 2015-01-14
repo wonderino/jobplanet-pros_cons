@@ -1,5 +1,14 @@
 d3.prosConsDataManager = function module() {
-  var exports = {},data;
+  var exports = {};
+  var dataList = [] // {pros:, cons:, name:}
+
+  exports.dataList = function(_dataList) {
+    if(!arguments.length) {
+      return dataList;
+    } else {
+      dataList = _dataList;
+    }
+  }
 
   exports.loadJSONData = function(_prosPath, _consPath, _callback) {
     function type(data) {
@@ -60,6 +69,7 @@ d3.prosCons = function module() {
 
       zippedData = d3.zip(_data[0], _data[1])
       var z = ['#1a468c', '#f9a33d', '#d13d30']
+
       var prosColor = d3.scale.log()
         .domain(d3.extent(_data[0].map(function(d){return d.keyness})))
         .range(['#6c88b5', '#1a468c'])
@@ -139,23 +149,32 @@ d3.prosCons = function module() {
           scrollToTr(self);
           // end of scroll
           d3.select(self).classed({'selected': true});
-
           var parentTr = d3.select(self).node().parentNode;
           var parentTrIndex = d3.select(parentTr).datum()[i].index;
           var newTr = table
             .insert('tr', "tr.row:nth-child("+(parentTrIndex+4) + ")")
             .attr('class', 'appended')
             .on('click', function(d) {
-              table.selectAll('tr.appended').remove();
-              d3.select(self).classed({'selected': false})
+              d3.select('ul.sentences')
+              .transition().duration(400)
+              .style('height', '0px')
+              .each('end', function() {
+                table.selectAll('tr.appended').remove();
+                d3.select(self).classed({'selected': false})
+              });
               //scrollToTr(self);
             })
 
-          newTr.append('td')
+          var ul = newTr.append('td')
           .attr('colspan', 2)
           .append('ul')
           .attr('class', 'sentences')
-          .selectAll('.sentence')
+
+          ul.transition()
+          .duration(400)
+          .style('height', '400px')
+
+          ul.selectAll('.sentence')
           .data(d.sentences)
           .enter().append('li')
           .attr('class', 'sentence')
