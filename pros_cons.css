@@ -3,7 +3,7 @@ body {
   font-family : "Apple SD Gothic Neo","Malgun Gothic",Dotum,sans-serif;
 }
 
-div.chart, div.canvas, table.table{
+div.chart, div.canvas table{
   margin: 0 auto;
   width : 100%;
   border-spacing : 0px;
@@ -11,7 +11,8 @@ div.chart, div.canvas, table.table{
 }
 
 caption.target {
-  padding : 8px;
+  font-size : 16px;
+  padding : 6px;
 }
 
 th.head {
@@ -70,6 +71,15 @@ span.arrow {
 span.keyness {
   font-size : 10px;
   padding-left: 5px;
+}
+
+select.targets {
+  background : transparent;
+  font-size : 16px;
+  font-weight : 100;
+  font-family : "Apple SD Gothic Neo","Malgun Gothic",Dotum,sans-serif;
+  margin : 10px 8px;
+  border : none;
 }
 
 div.menu {
@@ -132,10 +142,7 @@ path.line {
   font-size: 11px ;
 }
 
-select.targets {
-  margin : 10px 8px;
-  border : 3px solid;
-}
+
 
 .bar text {
   font-size: 10px;
