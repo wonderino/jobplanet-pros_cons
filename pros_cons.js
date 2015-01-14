@@ -100,6 +100,7 @@ d3.prosCons = function module() {
   }
 
   function update(zippedData) {
+    div.select('table').selectAll('.appended').remove();
     div.select('table').selectAll('.row').remove()
 
     var tr = div.select('table').selectAll('.row')

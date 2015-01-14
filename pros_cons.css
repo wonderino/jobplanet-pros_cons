@@ -29,6 +29,8 @@ td.col {
   width : 50%;
   color: #fff;
   curcursor : pointer;
+  -webkit-transition : color .4s;
+  transition: color .4s;
 }
 
 td.col.pros {
@@ -47,8 +49,6 @@ td.col.selected {
 }
 
 ul.sentences {
-  -webkit-transition : height 2s;
-  transition: width 2s;
   overflow-y:scroll;
   padding :4px;
   list-style-type: none;
