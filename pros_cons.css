@@ -74,7 +74,7 @@ span.keyness {
 }
 
 select.targets {
-  background : transparent;
+  background-color : transparent;
   font-size : 16px;
   font-weight : 100;
   font-family : "Apple SD Gothic Neo","Malgun Gothic",Dotum,sans-serif;
