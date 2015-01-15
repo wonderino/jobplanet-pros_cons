@@ -91,6 +91,12 @@ d3.prosCons = function module() {
   }
 
   function draw( targetData) {
+    div.selectAll('tr.col')
+    .transition().delay(function(d,i) {
+      return 200 + 100*(d.index);
+    }).duration(1000)
+    .style('background-color', '#fff')
+
     d3.prosConsDataManager().loadJSONData(targetData.pros, targetData.cons, function(_data) {
       prosColor.domain(d3.extent(_data[0].map(function(d){return d.keyness})))
       consColor.domain(d3.extent(_data[1].map(function(d){return d.keyness})))
@@ -193,7 +199,6 @@ d3.prosCons = function module() {
       else return consColor(d.keyness)
     })
 
-
     var keyword = td.append('span')
     .attr('class', 'keyword')
     .html(function(d) {return d.keyword})
@@ -205,7 +210,6 @@ d3.prosCons = function module() {
     var arrow = td.append('span')
     .attr('class', 'arrow')
     .html(function(d) {return '▾'})
-
 
   }
 
