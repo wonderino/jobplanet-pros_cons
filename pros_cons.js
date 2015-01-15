@@ -108,6 +108,11 @@ d3.prosCons = function module() {
 
     tr.enter().append('tr')
     .attr('class', 'row')
+    .transition()
+    .delay(function(d,i) {
+      return 100 * i;
+    })
+    .duration(800)
 
     var td = tr.selectAll('.col')
     .data(function(d){return d})
@@ -127,12 +132,14 @@ d3.prosCons = function module() {
       if (d3.select(this).classed('selected')) {
         div.select('table').selectAll('tr.appended').remove();
         d3.select(this).classed({'selected': false})
+        d3.select(this).select('span.arrow').html('▾')
       }
       else if (div.select('table').selectAll('tr.appended').empty()) {
         insertTr(this)
+        d3.select(this).select('span.arrow').html('▴')
       } else {
         div.select('table').selectAll('tr.appended').remove();
-        d3.selectAll('td.selected').classed({'selected': false})
+        d3.selectAll('td.selected').classed({'selected': false}).select('span.arrow').html('▾')
         insertTr(this);
       }
 
@@ -152,8 +159,8 @@ d3.prosCons = function module() {
           .each('end', function() {
             div.select('table').selectAll('tr.appended').remove();
             d3.select(self).classed({'selected': false})
+            d3.select(self).select('span.arrow').html('▾')
           });
-          //scrollToTr(self);
         })
 
         var ul = newTr.append('td')
@@ -171,14 +178,21 @@ d3.prosCons = function module() {
         .attr('class', 'sentence')
         .html(function(d) {return '"' + d +'"';})
       }
-    });
+    })
+
 
     td.exit().remove();
 
-    tr.selectAll('.pros')
-    .style('background-color', function(d) { return prosColor(d.keyness)})
-    tr.selectAll('.cons')
-    .style('background-color', function(d) { return consColor(d.keyness)})
+    tr.selectAll('.col')
+    .style('background-color', '#fff')
+    .transition().delay(function(d,i) {
+      return 200 + 100*(d.index);
+    }).duration(1000)
+    .style('background-color', function(d) {
+      if (d3.select(this).classed('pros')) return prosColor(d.keyness)
+      else return consColor(d.keyness)
+    })
+
 
     var keyword = td.append('span')
     .attr('class', 'keyword')

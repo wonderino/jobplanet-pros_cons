@@ -17,13 +17,13 @@ caption.target {
 
 th.head {
   font-weight : 100;
-  font-size : 15px;
+  font-size : 16px;
   padding: 8px 10px;
   margin : 0 8px;
 }
 
 td.col {
-  font-size : 14px;
+  font-size : 15px;
   padding: 8px 10px;
   margin : 0 8px;
   width : 50%;
@@ -44,7 +44,7 @@ td.col.cons {
 }
 
 td.col.selected {
-  font-weight : 400;
+
 }
 
 td.col.pros.selected {
@@ -58,14 +58,18 @@ td.col.cons.selected {
 
 ul.sentences {
   overflow-y:scroll;
-  padding :4px;
+  padding :0;
   list-style-type: none;
-  font-size : 13px;
+  font-size : 15px;
+  margin : 0 auto;
 }
 
 li.sentence {
-  padding : 4px;
-  margin : 4px;
+  padding : 10px;
+}
+
+li.sentence:nth-child(even) {
+  background: #f5f5f5;
 }
 
 span.keyword, span.keyness {
