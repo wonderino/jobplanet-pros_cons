@@ -91,7 +91,7 @@ d3.prosCons = function module() {
   }
 
   function draw( targetData) {
-    div.selectAll('tr.col')
+    div.selectAll('td.col')
     .transition().delay(function(d,i) {
       return 200 + 100*(d.index);
     }).duration(1000)
